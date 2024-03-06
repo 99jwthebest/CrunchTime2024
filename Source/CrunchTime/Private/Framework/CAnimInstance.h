@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
+#include "GameplayTagContainer.h"
 #include "CAnimInstance.generated.h"
 
 class ACharacter;
@@ -62,4 +63,8 @@ private:
 
 	FRotator PrevRot;
 	float YawSpeed;
+
+	bool bIsAiming;
+
+	//void AimingTagChanged(const FGameplayTag TagChanged, int32 )
 };
