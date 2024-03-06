@@ -12,7 +12,12 @@
 UCLASS()
 class UGA_GroundBlast : public UGA_AbilityBase
 {
+public:
+	UGA_GroundBlast();
+private:
 	GENERATED_BODY()
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* TargettingMontage;
 };
