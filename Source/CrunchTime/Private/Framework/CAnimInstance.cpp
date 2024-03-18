@@ -64,7 +64,6 @@ void UCAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 		LookDir.Normalize();
 		FwdSpeed = Velocity.Dot(LookDir);
 		RightSpeed = -Velocity.Dot(LookDir.Cross(FVector::UpVector));
-
 	}
 }
 
