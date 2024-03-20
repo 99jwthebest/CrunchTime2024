@@ -2,8 +2,11 @@
 
 
 #include "GameplayAbilities/GA_GroundBlast.h"
+#include "Abilities/Tasks/AbilityTask_WaitTargetData.h"
 #include "Abilities/Tasks/AbilityTask_PlayMontageAndWait.h"
 #include "GameplayAbilities/CAbilityGenericTags.h"
+#include "Targeting/CTargetActor_GroundPick.h"
+
 
 UGA_GroundBlast::UGA_GroundBlast()
 {
@@ -34,4 +37,50 @@ void UGA_GroundBlast::ActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 	PlayTargetingMontageTask->ReadyForActivation();
 
 	UE_LOG(LogTemp, Warning, TEXT("Casting GroundBlast"));
+
+	UAbilityTask_WaitTargetData* WaitTargetDataTask = UAbilityTask_WaitTargetData::WaitTargetData(this, NAME_None, EGameplayTargetingConfirmation::UserConfirmed, TargetActorClass);
+
+	WaitTargetDataTask->ValidData.AddDynamic(this, &UGA_GroundBlast::TargetAquired);
+	WaitTargetDataTask->Cancelled.AddDynamic(this, &UGA_GroundBlast::TargetCancelled);
+	WaitTargetDataTask->ReadyForActivation();
+
+	AGameplayAbilityTargetActor* SpawnedTargetActor;
+	WaitTargetDataTask->BeginSpawningActor(this, TargetActorClass, SpawnedTargetActor);
+	ACTargetActor_GroundPick* GroundPickActor = Cast<ACTargetActor_GroundPick>(SpawnedTargetActor);
+	if (GroundPickActor)
+	{
+		GroundPickActor->SetTargettingRadius(TargettingRadius);
+		GroundPickActor->SetTargettingRange(TargettingRange);
+	}
+	WaitTargetDataTask->FinishSpawningActor(this, GroundPickActor);
+}
+
+void UGA_GroundBlast::TargetAquired(const FGameplayAbilityTargetDataHandle& Data)
+{
+	if (K2_CommitAbility())
+	{
+		K2_EndAbility();
+		return;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("Target Aquired"));
+
+	if (K2_HasAuthority())
+	{
+		for (TSubclassOf<UGameplayEffect>& DamageEffect : DamageEffects)
+		{
+			FGameplayEffectSpecHandle DamageSpec = MakeOutgoingGameplayEffectSpec(DamageEffect, GetCurrentAbilitySpec()->Level);
+			ApplyGameplayEffectSpecToTarget(GetCurrentAbilitySpecHandle(), GetCurrentActorInfo(), GetCurrentActivationInfo(), DamageSpec, Data);
+		}
+		SignalDamageStimuliEvent(Data);
+	}
+
+	GetOwningComponentFromActorInfo()->GetAnimInstance()->Montage_Play(CastingMontage);
+
+	K2_EndAbility();
+}
+
+void UGA_GroundBlast::TargetCancelled(const FGameplayAbilityTargetDataHandle& Data)
+{
+	K2_EndAbility();
 }

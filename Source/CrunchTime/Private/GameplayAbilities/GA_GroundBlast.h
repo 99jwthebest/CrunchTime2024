@@ -18,6 +18,27 @@ private:
 	GENERATED_BODY()
 	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	TArray<TSubclassOf<UGameplayEffect>> DamageEffects;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* TargettingMontage;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* CastingMontage;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Targetting")
+	TSubclassOf<class ACTargetActor_GroundPick> TargetActorClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Targetting")
+	float TargettingRadius = 200.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Targetting")
+	float TargettingRange = 1200.0f;
+
+	UFUNCTION()
+	void TargetAquired(const FGameplayAbilityTargetDataHandle& Data);
+
+	UFUNCTION()
+	void TargetCancelled(const FGameplayAbilityTargetDataHandle& Data);
 };

@@ -29,6 +29,13 @@ private:
 	UPROPERTY(visibleAnywhere, Category="View")
 	UCameraComponent* viewCamera;
 
+	UPROPERTY(EditDefaultsOnly, Category = "View")
+	FVector AimCameraLocalOffset;
+
+	UPROPERTY(EditDefaultsOnly, Category = "View")
+	float AimCameraLerpingSpeed = 5;
+
+
 	virtual void PawnClientRestart() override;
 
 	/*****************************************************/
@@ -52,6 +59,13 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	UInputAction* AbilityOneInputAction;
 
+
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	UInputAction* AbilityConfirmAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	UInputAction* AbilityCancelAction;
+
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION()
@@ -66,8 +80,16 @@ private:
 	UFUNCTION()
 	void TryActivateAbilityOne();
 
+	UFUNCTION()
+	void ConfirmActionTriggered();
+	UFUNCTION()
+	void CancelActionTriggered();
+
 	FVector GetMoveFwdDir() const;
 	FVector GetMoveRightDir() const;
 
 	virtual void AimingTagChanged(bool bNewIsAiming) override;
+	void LerpCameraToLocalOffset(const FVector& LocalOffset);
+	void TickCameraLocalOffset(FVector Goal);
+	FTimerHandle CameraLerpHandle;
 };
