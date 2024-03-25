@@ -82,14 +82,23 @@ private:
 	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
 	void MaxManaUpdated(const FOnAttributeChangeData& ChangeData);
 
+	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
+	void MaxManaUpdated(const FOnAttributeChangeData& ChangeData);
+
+
 	/*************************************************************/
 	/*                              Gameplay Cue                                   */
 	/*************************************************************/
 public:
+	virtual void StartStunAnim() override;
+	virtual void StopStunAnim() override;
 	virtual void PlayHitReaction() override;
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Gameplay Cue")
 	UAnimMontage* HitReactionMontage;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Gameplay Cue")
+	UAnimMontage* StunMontage;
 
 	/*************************************************************/
 	/*                                      Death                                      */

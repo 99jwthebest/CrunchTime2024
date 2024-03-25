@@ -42,7 +42,6 @@ ACCharacterBase::ACCharacterBase()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetMaxHealthAttribute()).AddUObject(this, &ACCharacterBase::MaxHealthUpdated);
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetManaAttribute()).AddUObject(this, &ACCharacterBase::ManaUpdated);
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetMaxManaAttribute()).AddUObject(this, &ACCharacterBase::MaxManaUpdated);
-
 	AbilitySystemComponent->RegisterGameplayTagEvent(UCAbilityGenericTags::GetDeadTag()).AddUObject(this, &ACCharacterBase::DeathTagChanged);
 	AbilitySystemComponent->RegisterGameplayTagEvent(UCAbilityGenericTags::GetAimingTag()).AddUObject(this, &ACCharacterBase::AimingTagChanged);
 	AbilitySystemComponent->RegisterGameplayTagEvent(UCAbilityGenericTags::GetStunedTag()).AddUObject(this, &ACCharacterBase::StunTagChanged);
@@ -147,7 +146,6 @@ void ACCharacterBase::InitStatusHUD()
 	StatusGuage->SetHealth(AttributeSet->GetHealth(), AttributeSet->GetMaxHealth());
 	StatusGuage->SetMana(AttributeSet->GetMana(), AttributeSet->GetMaxMana());
 
-
 	if (IsLocallyControlled())
 	{
 		if(GetController() && GetController()->IsPlayerController())
@@ -179,8 +177,8 @@ void ACCharacterBase::StunTagChanged(const FGameplayTag TagChanged, int32 NewSta
 	}
 	else
 	{
-		AAIController* AIC = GetController<AAIController>();
 		GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+		AAIController* AIC = GetController<AAIController>();
 		if (AIC)
 		{
 			AIC->GetBrainComponent()->StartLogic();
@@ -211,12 +209,6 @@ void ACCharacterBase::HealthUpdated(const FOnAttributeChangeData& ChangeData)
 	}
 }
 
-void ACCharacterBase::MaxHealthUpdated(const FOnAttributeChangeData& ChangeData)
-{
-	if(StatusGuage)
-		StatusGuage->SetHealth(AttributeSet->GetHealth(), ChangeData.NewValue);
-}
-
 void ACCharacterBase::ManaUpdated(const FOnAttributeChangeData& ChangeData)
 {
 	if (StatusGuage)
@@ -233,17 +225,27 @@ void ACCharacterBase::ManaUpdated(const FOnAttributeChangeData& ChangeData)
 			AbilitySystemComponent->RemoveLooseGameplayTag(UCAbilityGenericTags::GetFullManaTag());
 		}
 	}
-
-	if (ChangeData.NewValue <= 0)
-	{
-		//StartDeath();
-	}
+}
+void ACCharacterBase::MaxHealthUpdated(const FOnAttributeChangeData& ChangeData)
+{
+	if (StatusGuage)
+		StatusGuage->SetHealth(AttributeSet->GetHealth(), ChangeData.NewValue);
 }
 
 void ACCharacterBase::MaxManaUpdated(const FOnAttributeChangeData& ChangeData)
 {
 	if (StatusGuage)
 		StatusGuage->SetMana(AttributeSet->GetMana(), ChangeData.NewValue);
+}
+
+void ACCharacterBase::StartStunAnim()
+{
+	PlayMontage(StunMontage);
+}
+
+void ACCharacterBase::StopStunAnim()
+{
+	GetMesh()->GetAnimInstance()->Montage_Stop(0.2, StunMontage);
 }
 
 void ACCharacterBase::PlayHitReaction()

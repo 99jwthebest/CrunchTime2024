@@ -37,7 +37,6 @@ void UGameplayUI::MaxHealthUpdated(const FOnAttributeChangeData& ChangeData)
 void UGameplayUI::ManaUpdated(const FOnAttributeChangeData& ChangeData)
 {
 	StatusGuage->SetMana(ChangeData.NewValue, GetAttributeValue(UCAttributeSet::GetMaxManaAttribute()));
-
 }
 
 void UGameplayUI::MaxManaUpdated(const FOnAttributeChangeData& ChangeData)

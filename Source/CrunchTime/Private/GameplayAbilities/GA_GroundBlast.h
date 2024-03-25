@@ -27,18 +27,18 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* CastingMontage;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Targetting")
+	UPROPERTY(EditDefaultsOnly, Category = "Targeting")
 	TSubclassOf<class ACTargetActor_GroundPick> TargetActorClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Targeting")
+	float TargetingRadius = 200.f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Targetting")
-	float TargettingRadius = 200.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Targetting")
-	float TargettingRange = 1200.0f;
+	UPROPERTY(EditDefaultsOnly, Category = "Targeting")
+	float TargettingRange = 1200.f;
 
 	UFUNCTION()
 	void TargetAquired(const FGameplayAbilityTargetDataHandle& Data);
-
+	
 	UFUNCTION()
 	void TargetCancelled(const FGameplayAbilityTargetDataHandle& Data);
 };

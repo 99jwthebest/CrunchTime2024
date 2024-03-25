@@ -13,12 +13,11 @@ UCLASS()
 class ACTargetActor_GroundPick : public AGameplayAbilityTargetActor
 {
 	GENERATED_BODY()
-	
 public:
 	ACTargetActor_GroundPick();
 
 	void SetTargettingRadius(float TargettingRadius);
-
+	
 	void SetTargettingRange(float NewTargettingRange);
 
 	void Tick(float DeltaSecond) override;
@@ -30,7 +29,7 @@ public:
 private:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Targetting")
 	class USphereComponent* TargetSphere;
-
+	
 	UPROPERTY(VisibleDefaultsOnly, Category = "Visual")
 	class UDecalComponent* TargetDecal;
 

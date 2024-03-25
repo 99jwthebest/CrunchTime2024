@@ -54,9 +54,8 @@ void ACPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		enhancedInputComp->BindAction(jumpInputAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::Jump);
 		enhancedInputComp->BindAction(baiscAttackAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::DoBasicAttack);
 		enhancedInputComp->BindAction(AbilityOneInputAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::TryActivateAbilityOne);
-		enhancedInputComp->BindAction(AbilityConfirmAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::ConfirmActionTriggered);
+		enhancedInputComp->BindAction(AbilityConfirmAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::ComfirmActionTriggered);
 		enhancedInputComp->BindAction(AbilityCancelAction, ETriggerEvent::Triggered, this, &ACPlayerCharacter::CancelActionTriggered);
-
 	}
 }
 
@@ -85,17 +84,16 @@ void ACPlayerCharacter::TryActivateAbilityOne()
 	GetAbilitySystemComponent()->PressInputID((int)EAbilityInputID::AbilityOne);
 }
 
-void ACPlayerCharacter::ConfirmActionTriggered()
+void ACPlayerCharacter::ComfirmActionTriggered()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Confirmed"));
+	UE_LOG(LogTemp, Warning,TEXT("Confirmed"));
 	GetAbilitySystemComponent()->InputConfirm();
 }
 
 void ACPlayerCharacter::CancelActionTriggered()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Cancelled"));
+	UE_LOG(LogTemp, Warning,TEXT("Cancelled"));
 	GetAbilitySystemComponent()->InputCancel();
-
 }
 
 FVector ACPlayerCharacter::GetMoveFwdDir() const
@@ -133,7 +131,7 @@ void ACPlayerCharacter::LerpCameraToLocalOffset(const FVector& LocalOffset)
 void ACPlayerCharacter::TickCameraLocalOffset(FVector Goal)
 {
 	FVector CurrentLocalOffset = viewCamera->GetRelativeLocation();
-	if (FVector::Distance(CurrentLocalOffset, Goal) < 1)
+	if (FVector::Dist(CurrentLocalOffset, Goal) < 1)
 	{
 		viewCamera->SetRelativeLocation(Goal);
 		return;
@@ -142,5 +140,4 @@ void ACPlayerCharacter::TickCameraLocalOffset(FVector Goal)
 	FVector NewLocalOffset = FMath::Lerp(CurrentLocalOffset, Goal, GetWorld()->GetDeltaSeconds() * AimCameraLerpingSpeed);
 	viewCamera->SetRelativeLocation(NewLocalOffset);
 	CameraLerpHandle = GetWorldTimerManager().SetTimerForNextTick(FTimerDelegate::CreateUObject(this, &ACPlayerCharacter::TickCameraLocalOffset, Goal));
-
 }

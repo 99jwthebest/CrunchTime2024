@@ -20,7 +20,7 @@ UGA_MeleeCombo::UGA_MeleeCombo()
 	AbilityTags.AddTag(FGameplayTag::RequestGameplayTag("ability.combo.ability"));
 	BlockAbilitiesWithTag.AddTag(FGameplayTag::RequestGameplayTag("ability.combo.ability"));
 	ActivationBlockedTags.AddTag(UCAbilityGenericTags::GetAimingTag());
-	
+
 	FAbilityTriggerData TriggerData;
 	TriggerData.TriggerTag = UCAbilityGenericTags::GetBasicAttackAcitvationTag();
 	TriggerData.TriggerSource = EGameplayAbilityTriggerSource::GameplayEvent;
