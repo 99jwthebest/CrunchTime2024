@@ -53,20 +53,21 @@ void UGA_GroundBlast::ActivateAbility(const FGameplayAbilitySpecHandle Handle, c
 		GroundPickActor->SetTargettingRange(TargettingRange);
 	}
 	WaitTargetDataTask->FinishSpawningActor(this, GroundPickActor);
+
 }
 
 void UGA_GroundBlast::TargetAquired(const FGameplayAbilityTargetDataHandle& Data)
 {
-	if (K2_CommitAbility())
+	if (K2_HasAuthority())
 	{
-		K2_EndAbility();
-		return;
-	}
+		if (K2_CommitAbility())
+		{
+			K2_EndAbility();
+			return;
+		}
 
 	UE_LOG(LogTemp, Warning, TEXT("Target Aquired"));
 
-	if (K2_HasAuthority())
-	{
 		for (TSubclassOf<UGameplayEffect>& DamageEffect : DamageEffects)
 		{
 			FGameplayEffectSpecHandle DamageSpec = MakeOutgoingGameplayEffectSpec(DamageEffect, GetCurrentAbilitySpec()->Level);

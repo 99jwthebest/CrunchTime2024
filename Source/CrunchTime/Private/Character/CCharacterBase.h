@@ -63,6 +63,8 @@ private:
 	virtual void AimingTagChanged(bool bNewIsAiming) {/*empty in base*/};
 	bool bIsAiming;
 
+	void StunTagChanged(const FGameplayTag TagChanged, int32 NewStackCount);
+
 	UPROPERTY(VisibleAnywhere, Category = "Gameplay Ability")
 	UCAbilitySystemComponent* AbilitySystemComponent;
 
@@ -77,6 +79,8 @@ private:
 
 	void HealthUpdated(const FOnAttributeChangeData& ChangeData);
 	void MaxHealthUpdated(const FOnAttributeChangeData& ChangeData);
+	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
+	void MaxManaUpdated(const FOnAttributeChangeData& ChangeData);
 
 	/*************************************************************/
 	/*                              Gameplay Cue                                   */
