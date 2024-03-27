@@ -18,7 +18,7 @@ class UAbilityGuage : public UUserWidget
 	GENERATED_BODY()
 public:
 	void SetupOwingAbilityCDO(const UGA_AbilityBase* OwningAbilityCDO);
-	void SubscribeAbilityCommitedDelegate() const;
+	void SubscribeAbilityCommitedDelegate();
 private:
 	void AbilityCommited(UGameplayAbility* Ability);
 

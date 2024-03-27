@@ -1,10 +1,9 @@
-#include "AbilityGuage.h"
-#include "AbilityGuage.h"
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Widgets/AbilityGuage.h"
 
+#include "AbilitySystemComponent.h"
 
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
@@ -40,14 +39,16 @@ void UAbilityGuage::SetupOwingAbilityCDO(const UGA_AbilityBase* OwningAbilityCDO
 	}
 }
 
-void UAbilityGuage::SubscribeAbilityCommitedDelegate() const
+void UAbilityGuage::SubscribeAbilityCommitedDelegate()
 {
 	UAbilitySystemComponent* OwningASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetOwningPlayerPawn());
 	if (OwningASC)
 	{
-
+		if (!OwningASC->AbilityCommittedCallbacks.IsBoundToObject(this))
+		{
+			OwningASC->AbilityCommittedCallbacks.AddUObject(this, &UAbilityGuage::AbilityCommited);
+		}
 	}
-
 }
 
 void UAbilityGuage::AbilityCommited(UGameplayAbility* Ability)
