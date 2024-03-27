@@ -23,7 +23,7 @@ public:
 	void ApplyInitialEffects();
 	void GrantInitialAbilities();
 	void ApplyFullStat();
-
+	TArray<const UGA_AbilityBase*> GetNoneGenericAbilityCDOs() const;
 	TArray<const FGameplayAbilitySpec*> GetGrantedNoneGenericAbilities() const;
 
 private:

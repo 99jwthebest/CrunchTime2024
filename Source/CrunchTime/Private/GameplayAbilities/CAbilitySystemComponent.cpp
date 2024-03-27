@@ -41,6 +41,18 @@ void UCAbilitySystemComponent::ApplyFullStat()
 		ApplyGameplayEffect(FullStatEffect);
 }
 
+TArray<const UGA_AbilityBase*> UCAbilitySystemComponent::GetNoneGenericAbilityCDOs() const
+{
+
+	TArray<const FGameplayAbilitySpec*> GrantedAbilityCDOs;
+	for (const TPair<EAbilityInputID, TSubclassOf<UGA_AbilityBase>>& AbilityPair : Abilities)
+	{
+		GrantedAbilityCDOs.Add(AbilityPair.Value.GetDefaultObject());
+	}
+
+	return GrantedAbilityCDOs;
+}
+
 TArray<const FGameplayAbilitySpec*> UCAbilitySystemComponent::GetGrantedNoneGenericAbilities() const
 {
 	TArray<const FGameplayAbilitySpec*> GrantedAbilitySpecs;
