@@ -43,8 +43,7 @@ void UCAbilitySystemComponent::ApplyFullStat()
 
 TArray<const UGA_AbilityBase*> UCAbilitySystemComponent::GetNoneGenericAbilityCDOs() const
 {
-
-	TArray<const FGameplayAbilitySpec*> GrantedAbilityCDOs;
+	TArray<const UGA_AbilityBase*> GrantedAbilityCDOs;
 	for (const TPair<EAbilityInputID, TSubclassOf<UGA_AbilityBase>>& AbilityPair : Abilities)
 	{
 		GrantedAbilityCDOs.Add(AbilityPair.Value.GetDefaultObject());
