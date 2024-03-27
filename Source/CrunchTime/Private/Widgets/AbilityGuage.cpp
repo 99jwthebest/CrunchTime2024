@@ -1,7 +1,10 @@
+#include "AbilityGuage.h"
+#include "AbilityGuage.h"
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Widgets/AbilityGuage.h"
+
 
 #include "Components/Image.h"
 #include "Components/TextBlock.h"
@@ -29,9 +32,28 @@ void UAbilityGuage::SetupOwingAbilityCDO(const UGA_AbilityBase* OwningAbilityCDO
 		ManaCostText->SetText(FText::AsNumber(ManaCost, &FormattingOptions));
 	
 		CooldownCounterText->SetVisibility(ESlateVisibility::Hidden);
+		SubscribeAbilityCommitedDelegate();
 	}
 	else
 	{
 		//make it empty
+	}
+}
+
+void UAbilityGuage::SubscribeAbilityCommitedDelegate() const
+{
+	UAbilitySystemComponent* OwningASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetOwningPlayerPawn());
+	if (OwningASC)
+	{
+
+	}
+
+}
+
+void UAbilityGuage::AbilityCommited(UGameplayAbility* Ability)
+{
+	if (Ability->GetClass() == AbilityCDO->GetClass())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Ability : %s Committed"), *Ability->GetName());
 	}
 }
