@@ -82,8 +82,6 @@ private:
 	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
 	void MaxManaUpdated(const FOnAttributeChangeData& ChangeData);
 
-	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
-	void MaxManaUpdated(const FOnAttributeChangeData& ChangeData);
 
 
 	/*************************************************************/
