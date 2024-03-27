@@ -56,5 +56,8 @@ void UAbilityGuage::AbilityCommited(UGameplayAbility* Ability)
 	if (Ability->GetClass() == AbilityCDO->GetClass())
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Ability : %s Committed"), *Ability->GetName());
+		float CooldownDuration = 0;
+		float CooldownTimeRemaining = 0;
+		//Ability->GetCooldownTimeRemainingAndDuration(Ability->GetCurrentAbilitySpecHandle(), Ability->GetCurrentActorInfo());
 	}
 }
