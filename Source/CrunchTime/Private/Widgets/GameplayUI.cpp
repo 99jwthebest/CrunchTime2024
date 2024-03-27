@@ -43,6 +43,7 @@ void UGameplayUI::NativeConstruct()
 			UHorizontalBoxSlot* AbilitySlot =  AbilityHBox->AddChildToHorizontalBox(NewAbilityGuage);
 			NewAbilityGuage->SetupOwingAbilityCDO(GrantedAbility);
 			AbilitySlot->SetPadding(FMargin(5));
+			AbiityGauges.Add(NewAbilityGuage);
 		}
 	}
 }

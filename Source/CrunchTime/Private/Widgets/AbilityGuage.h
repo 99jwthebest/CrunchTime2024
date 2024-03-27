@@ -36,9 +36,27 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
 	FName CooldownPercentMaterialParamName = "Percent";
+
+	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
+	FName NotEnough = "Percent";
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Icon")
 	FName IconTextureMaterialParamName = "Icon";
 
 	const class UGA_AbilityBase* AbilityCDO;
+	UMaterialInstanceDynamic* IconMat;
+
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
+	float CooldownTickInterval = 1.0f / 24.0f;
+
+	FTimerHandle CooldownTickTimerHandle;
+
+
+	float CooldownDuration;
+	float CooldownTimeRemaining;
+	void TickCooldown();
+	void CooldownFinished();
+
+	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
 };

@@ -38,6 +38,9 @@ private:
 
 	UPROPERTY()
 	const class UAbilitySystemComponent* OwnerAbilitySystemComponent;
+
+	TArray<UAbilityGuage*> AbiityGauges;
+
 };
 
 
