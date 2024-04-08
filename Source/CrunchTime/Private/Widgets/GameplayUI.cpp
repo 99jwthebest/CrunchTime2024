@@ -14,6 +14,7 @@
 #include "GameplayAbilitySpec.h"
 
 #include "Widgets/AbilityGuage.h"
+#include "Widgets/AttributeGauge.h"
 #include "Widgets/StatusGuage.h"
 
 void UGameplayUI::NativeConstruct()
@@ -27,6 +28,12 @@ void UGameplayUI::NativeConstruct()
 		OwnerASC->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetMaxHealthAttribute()).AddUObject(this, &UGameplayUI::MaxHealthUpdated);
 		OwnerASC->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetManaAttribute()).AddUObject(this, &UGameplayUI::ManaUpdated);
 		OwnerASC->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetMaxManaAttribute()).AddUObject(this, &UGameplayUI::MaxManaUpdated);
+
+		OwnerASC->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetStrengthAttribute()).AddUObject(StrengthGauge, &UAttributeGauge::UpdateValue);
+		OwnerASC->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetIntellegenceAttribute()).AddUObject(IntelligenceGauge, &UAttributeGauge::UpdateValue);
+		OwnerASC->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetAttackDamageAttribute()).AddUObject(AttackDamageGauge, &UAttributeGauge::UpdateValue);
+		OwnerASC->GetGameplayAttributeValueChangeDelegate(UCAttributeSet::GetArmorAttribute()).AddUObject(ArmorGauge, &UAttributeGauge::UpdateValue);
+
 	}
 
 	OwnerAbilitySystemComponent = OwnerASC;

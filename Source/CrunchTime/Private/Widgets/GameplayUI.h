@@ -24,6 +24,15 @@ private:
 	UPROPERTY(meta=(BindWidget))
 	class UHorizontalBox* AbilityHBox;
 
+	UPROPERTY(meta = (BindWidget))
+	class UAttributeGauge* StrengthGauge;
+	UPROPERTY(meta = (BindWidget))
+	class UAttributeGauge* IntelligenceGauge;
+	UPROPERTY(meta = (BindWidget))
+	class UAttributeGauge* AttackDamageGauge;
+	UPROPERTY(meta = (BindWidget))
+	class UAttributeGauge* ArmorGauge;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Ability")
 	TSubclassOf<class UAbilityGuage> AbilityGuageClass;
 
