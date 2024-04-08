@@ -18,7 +18,7 @@ class UAbilityGuage : public UUserWidget
 	GENERATED_BODY()
 public:
 	void SetupOwingAbilityCDO(const UGA_AbilityBase* OwningAbilityCDO);
-	void SubscribeAbilityCommitedDelegate();
+	void SubscribeAbilityDelegates();
 private:
 	void AbilityCommited(UGameplayAbility* Ability);
 
@@ -36,27 +36,27 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
 	FName CooldownPercentMaterialParamName = "Percent";
-
-	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
-	FName NotEnough = "Percent";
 	
+	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
+	FName NotEnoughManaShadeAlphaMaterialParamName = "NotEnoughManaShadeAlpha";
+
 	UPROPERTY(EditDefaultsOnly, Category = "Icon")
 	FName IconTextureMaterialParamName = "Icon";
 
 	const class UGA_AbilityBase* AbilityCDO;
 	UMaterialInstanceDynamic* IconMat;
 
-	
 	UPROPERTY(EditDefaultsOnly, Category = "Cooldown")
-	float CooldownTickInterval = 1.0f / 24.0f;
+	float CooldownTickInterval = 1.f / 24.f;
 
 	FTimerHandle CooldownTickTimerHandle;
 
-
-	float CooldownDuration;
-	float CooldownTimeRemaining;
 	void TickCooldown();
+
 	void CooldownFinished();
+
+	float CooldownDuration = 0;
+	float CooldownTimeRemaining = 0;
 
 	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
 };

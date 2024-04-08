@@ -31,17 +31,15 @@ float UCAbilitySystemBlueprintLibrary::GetAbilityStaticManaCost(const UGameplayA
 float UCAbilitySystemBlueprintLibrary::GetActiveAbilityManaCost(const UAbilitySystemComponent* ASC, const UGameplayAbility* AbilityCDO)
 {
 	FGameplayAbilitySpec* ActiveAbilitySpec = ASC->FindAbilitySpecFromClass(AbilityCDO->GetClass());
-
 	if (!ActiveAbilitySpec)
 	{
 		return GetAbilityStaticManaCost(AbilityCDO);
 	}
 	float Cost = 0;
 	UGameplayEffect* CostEffect = AbilityCDO->GetCostGameplayEffect();
-	if (CostEffect && CostEffect->Modifiers.Num() > 0)
+	if (CostEffect&& CostEffect->Modifiers.Num()>0)
 	{
-		FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(CostEffect->GetClass(), ActiveAbilitySpec->Level, ASC->MakeEffectContext());
-
+		FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(CostEffect->GetClass(),  ActiveAbilitySpec->Level, ASC->MakeEffectContext());
 		CostEffect->Modifiers[0].ModifierMagnitude.AttemptCalculateMagnitude(*SpecHandle.Data.Get(), Cost);
 	}
 
