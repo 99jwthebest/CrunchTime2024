@@ -55,49 +55,41 @@ void UCAttributeSet::OnRep_MaxMana(const FGameplayAttributeData& OldValue)
 void UCAttributeSet::OnRep_Level(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, Level, OldValue);
-
 }
 
 void UCAttributeSet::OnRep_Experience(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, Experience, OldValue);
-
 }
 
 void UCAttributeSet::OnRep_PrevLevelExperience(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, PrevLevelExperience, OldValue);
-
 }
 
 void UCAttributeSet::OnRep_NextLevelExperience(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, NextLevelExperience, OldValue);
-
 }
 
 void UCAttributeSet::OnRep_Strength(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, Strength, OldValue);
-
 }
 
-void UCAttributeSet::OnRep_Intelligence(const FGameplayAttributeData& OldValue)
+void UCAttributeSet::OnRep_Intellegence(const FGameplayAttributeData& OldValue)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, Intelligence, OldValue);
-
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, Intellegence, OldValue);
 }
 
 void UCAttributeSet::OnRep_AttackDamage(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, AttackDamage, OldValue);
-
 }
 
 void UCAttributeSet::OnRep_Armor(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UCAttributeSet, Armor, OldValue);
-
 }
 
 void UCAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
@@ -110,15 +102,12 @@ void UCAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>&
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, Mana, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, MaxMana, COND_None, REPNOTIFY_Always);
 
-
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, Level, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, Experience, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, PrevLevelExperience, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, NextLevelExperience, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, Armor, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, Strength, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, Intelligence, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, Intellegence, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UCAttributeSet, AttackDamage, COND_None, REPNOTIFY_Always);
-
-
 }
