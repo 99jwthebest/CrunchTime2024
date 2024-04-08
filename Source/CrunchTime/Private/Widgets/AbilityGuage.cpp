@@ -96,12 +96,17 @@ void UAbilityGuage::ManaUpdated(const FOnAttributeChangeData& ChangeData)
 {
 	float NewMana = ChangeData.NewValue;
 	float Cost = UCAbilitySystemBlueprintLibrary::GetActiveAbilityManaCost(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetOwningPlayerPawn()), AbilityCDO);
+	UE_LOG(LogTemp, Warning, TEXT("Mana Updated, now is %f"), NewMana,Cost);
 	if (NewMana < Cost)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Not enough Mana"));
+
 		IconMat->SetScalarParameterValue(NotEnoughManaShadeAlphaMaterialParamName, 1);
 	}
 	else
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Have enough Mana"));
+
 		IconMat->SetScalarParameterValue(NotEnoughManaShadeAlphaMaterialParamName, 0);
 	}
 }

@@ -27,6 +27,17 @@ public:
 	ATTRIBUTE_ACCESSORS(UCAttributeSet, MaxHealth)
 	ATTRIBUTE_ACCESSORS(UCAttributeSet, Mana)
 	ATTRIBUTE_ACCESSORS(UCAttributeSet, MaxMana)
+
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, Level)
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, Experience)
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, NextLevelExperience)
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, PrevLevelExperience)
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, Strength)
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, Intelligence)
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, AttackDamage)
+	ATTRIBUTE_ACCESSORS(UCAttributeSet, Armor)
+
+
 	
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
@@ -40,8 +51,29 @@ private:
 	UPROPERTY(ReplicatedUsing = OnRep_Mana)
 	FGameplayAttributeData Mana;
 
-	UPROPERTY(ReplicatedUsing = OnRep_MaxMana)
-	FGameplayAttributeData MaxMana;
+	UPROPERTY(ReplicatedUsing = OnRep_Experience)
+	FGameplayAttributeData Experience;
+
+	UPROPERTY(ReplicatedUsing = OnRep_NextLevelExperience)
+	FGameplayAttributeData NextLevelExperience;
+
+	UPROPERTY(ReplicatedUsing = OnRep_PrevLevelExperience)
+	FGameplayAttributeData PrevLevelExperience;
+
+	UPROPERTY(ReplicatedUsing = OnRep_Level)
+	FGameplayAttributeData Level;
+
+	UPROPERTY(ReplicatedUsing = OnRep_Strength)
+	FGameplayAttributeData Strength;
+
+	UPROPERTY(ReplicatedUsing = OnRep_Intelligence)
+	FGameplayAttributeData Intelligence;
+
+	UPROPERTY(ReplicatedUsing = OnRep_AttackDamage)
+	FGameplayAttributeData AttackDamage;
+
+	UPROPERTY(ReplicatedUsing = OnRep_Armor)
+	FGameplayAttributeData Armor;
 
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldValue);
@@ -54,6 +86,30 @@ private:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_Level(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_Experience(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_PrevLevelExperience(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_NextLevelExperience(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_Strength(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_Intelligence(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_AttackDamage(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	void OnRep_Armor(const FGameplayAttributeData& OldValue);
 
 	virtual void GetLifetimeReplicatedProps(TArray< class FLifetimeProperty >& OutLifetimeProps) const override;
 };
