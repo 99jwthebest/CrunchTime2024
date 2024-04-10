@@ -23,6 +23,18 @@ private:
 	
 	UPROPERTY(meta=(BindWidget))
 	class UHorizontalBox* AbilityHBox;
+	
+	UPROPERTY(meta=(BindWidget))
+	class UAttributeGuage* StrengthGuage;
+
+	UPROPERTY(meta=(BindWidget))
+	class UAttributeGuage* IntellegenceGuage;
+
+	UPROPERTY(meta=(BindWidget))
+	class UAttributeGuage* AttackDamageGuage;
+
+	UPROPERTY(meta=(BindWidget))
+	class UAttributeGuage* ArmorGuage;
 
 	UPROPERTY(meta = (BindWidget))
 	class UAttributeGauge* StrengthGauge;

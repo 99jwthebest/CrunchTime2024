@@ -16,7 +16,6 @@ UMMC_Damage::UMMC_Damage()
 
 	RelevantAttributesToCapture.Add(AttackDamageCaptureDef);
 	RelevantAttributesToCapture.Add(ArmorCaptureDef);
-
 }
 
 float UMMC_Damage::CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const
@@ -24,13 +23,13 @@ float UMMC_Damage::CalculateBaseMagnitude_Implementation(const FGameplayEffectSp
 	FAggregatorEvaluateParameters Params;
 	Params.SourceTags = Spec.CapturedSourceTags.GetAggregatedTags();
 	Params.TargetTags = Spec.CapturedTargetTags.GetAggregatedTags();
-	
+
 	float Damage = 0;
 	GetCapturedAttributeMagnitude(AttackDamageCaptureDef, Spec, Params, Damage);
 
 	float Armor = 0;
 	GetCapturedAttributeMagnitude(ArmorCaptureDef, Spec, Params, Armor);
-
+	
 	float DamageToDeal = Damage - Armor;
 	if (DamageToDeal < 0)
 	{
@@ -38,5 +37,4 @@ float UMMC_Damage::CalculateBaseMagnitude_Implementation(const FGameplayEffectSp
 	}
 
 	return -DamageToDeal;
-
 }

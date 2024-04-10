@@ -13,11 +13,10 @@ UCLASS()
 class UMMC_Damage : public UGameplayModMagnitudeCalculation
 {
 	GENERATED_BODY()
-	
 public:
 	UMMC_Damage();
 	virtual float CalculateBaseMagnitude_Implementation(const FGameplayEffectSpec& Spec) const override;
+
 	FGameplayEffectAttributeCaptureDefinition AttackDamageCaptureDef;
 	FGameplayEffectAttributeCaptureDefinition ArmorCaptureDef;
-
 };
