@@ -46,8 +46,8 @@ ACCharacterBase::ACCharacterBase()
 	AbilitySystemComponent->RegisterGameplayTagEvent(UCAbilityGenericTags::GetAimingTag()).AddUObject(this, &ACCharacterBase::AimingTagChanged);
 	AbilitySystemComponent->RegisterGameplayTagEvent(UCAbilityGenericTags::GetStunedTag()).AddUObject(this, &ACCharacterBase::StunTagChanged);
 
-	StatusWidgetComp = CreateDefaultSubobject<UWidgetComponent>("Status Widget Comp");
-	StatusWidgetComp->SetupAttachment(GetRootComponent());
+	//StatusWidgetComp = CreateDefaultSubobject<UWidgetComponent>("Status Widget Comp");
+	//StatusWidgetComp->SetupAttachment(GetRootComponent());
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera,  ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
@@ -132,24 +132,24 @@ UAbilitySystemComponent* ACCharacterBase::GetAbilitySystemComponent() const
 
 void ACCharacterBase::InitStatusHUD()
 {
-	StatusGuage = Cast<UStatusGuage>(StatusWidgetComp->GetUserWidgetObject());
+	/*StatusGuage = Cast<UStatusGuage>(StatusWidgetComp->GetUserWidgetObject());
 	if (!StatusGuage)
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s can't spawn status guage hud, status widget component has the wrong widget setup"), *GetName());
 
 
 		return;
-	}
+	}*/
 
-	StatusGuage->SetRenderScale(FVector2D{0.5f});
+	//StatusGuage->SetRenderScale(FVector2D{0.5f});
 
-	StatusGuage->SetHealth(AttributeSet->GetHealth(), AttributeSet->GetMaxHealth());
-	StatusGuage->SetMana(AttributeSet->GetMana(), AttributeSet->GetMaxMana());
+	//StatusGuage->SetHealth(AttributeSet->GetHealth(), AttributeSet->GetMaxHealth());
+	//StatusGuage->SetMana(AttributeSet->GetMana(), AttributeSet->GetMaxMana());
 
 	if (IsLocallyControlled())
 	{
-		if(GetController() && GetController()->IsPlayerController())
-			StatusGuage->SetVisibility(ESlateVisibility::Hidden);
+		/*if(GetController() && GetController()->IsPlayerController())
+			StatusGuage->SetVisibility(ESlateVisibility::Hidden);*/
 	}
 }
 
@@ -188,8 +188,8 @@ void ACCharacterBase::StunTagChanged(const FGameplayTag TagChanged, int32 NewSta
 
 void ACCharacterBase::HealthUpdated(const FOnAttributeChangeData& ChangeData)
 {
-	if(StatusGuage)
-		StatusGuage->SetHealth(ChangeData.NewValue, AttributeSet->GetMaxHealth());
+	/*if(StatusGuage)
+		StatusGuage->SetHealth(ChangeData.NewValue, AttributeSet->GetMaxHealth());*/
 
 	if (HasAuthority())
 	{
@@ -211,8 +211,8 @@ void ACCharacterBase::HealthUpdated(const FOnAttributeChangeData& ChangeData)
 
 void ACCharacterBase::ManaUpdated(const FOnAttributeChangeData& ChangeData)
 {
-	if (StatusGuage)
-		StatusGuage->SetMana(ChangeData.NewValue, AttributeSet->GetMaxMana());
+	/*if (StatusGuage)
+		StatusGuage->SetMana(ChangeData.NewValue, AttributeSet->GetMaxMana());*/
 
 	if (HasAuthority())
 	{
@@ -228,14 +228,14 @@ void ACCharacterBase::ManaUpdated(const FOnAttributeChangeData& ChangeData)
 }
 void ACCharacterBase::MaxHealthUpdated(const FOnAttributeChangeData& ChangeData)
 {
-	if (StatusGuage)
-		StatusGuage->SetHealth(AttributeSet->GetHealth(), ChangeData.NewValue);
+	/*if (StatusGuage)
+		StatusGuage->SetHealth(AttributeSet->GetHealth(), ChangeData.NewValue);*/
 }
 
 void ACCharacterBase::MaxManaUpdated(const FOnAttributeChangeData& ChangeData)
 {
-	if (StatusGuage)
-		StatusGuage->SetMana(AttributeSet->GetMana(), ChangeData.NewValue);
+	/*if (StatusGuage)
+		StatusGuage->SetMana(AttributeSet->GetMana(), ChangeData.NewValue);*/
 }
 
 void ACCharacterBase::StartStunAnim()

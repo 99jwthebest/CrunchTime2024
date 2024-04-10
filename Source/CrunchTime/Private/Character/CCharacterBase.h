@@ -71,11 +71,11 @@ private:
 	UPROPERTY()
 	UCAttributeSet* AttributeSet;
 
-	UPROPERTY(VisibleAnywhere, Category = "UI")
-	class UWidgetComponent* StatusWidgetComp;
+	/*UPROPERTY(VisibleDefaultsOnly, Category = "UI")
+	class UWidgetComponent* StatusWidgetComp;*/
 
-	UPROPERTY()
-	class UStatusGuage* StatusGuage;
+	/*UPROPERTY()
+	class UStatusGuage* StatusGuage;*/
 
 	void HealthUpdated(const FOnAttributeChangeData& ChangeData);
 	void MaxHealthUpdated(const FOnAttributeChangeData& ChangeData);
