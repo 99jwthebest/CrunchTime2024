@@ -71,20 +71,20 @@ private:
 	UPROPERTY()
 	UCAttributeSet* AttributeSet;
 
-	/*UPROPERTY(VisibleDefaultsOnly, Category = "UI")
-	class UWidgetComponent* StatusWidgetComp;*/
+	UPROPERTY(VisibleAnywhere, Category = "UI")
+	class UWidgetComponent* StatusWidgetComp;
 
-	/*UPROPERTY()
-	class UStatusGuage* StatusGuage;*/
+	UPROPERTY()
+	class UStatusGuage* StatusGuage;
 
 	void HealthUpdated(const FOnAttributeChangeData& ChangeData);
 	void MaxHealthUpdated(const FOnAttributeChangeData& ChangeData);
+
 	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
 	void MaxManaUpdated(const FOnAttributeChangeData& ChangeData);
 
 	void ExperienceUpdated(const FOnAttributeChangeData& ChangeData);
 	void NextLevelExperienceUpdated(const FOnAttributeChangeData& ChangeData);
-
 	void LevelUp();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Gameplay Ability")

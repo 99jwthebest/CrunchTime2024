@@ -1,5 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -54,7 +53,6 @@ private:
 	void ManaUpdated(const FOnAttributeChangeData& ChangeData);
 	void MaxManaUpdated(const FOnAttributeChangeData& ChangeData);
 
-
 	float GetAttributeValue(const FGameplayAttribute& Attribute) const;
 
 	UPROPERTY()
@@ -63,5 +61,3 @@ private:
 	TArray<UAbilityGuage*> AbiityGauges;
 
 };
-
-
